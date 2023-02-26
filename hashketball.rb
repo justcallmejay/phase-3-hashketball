@@ -1,3 +1,4 @@
+require 'pry'
 # Write your code below game_hash
 def game_hash
   {
@@ -127,3 +128,40 @@ def game_hash
 end
 
 # Write code here
+def all_players
+  game_hash[:home][:players].concat(game_hash[:away][:players])
+end
+
+# def teams
+#   game_hash[:home].concat(game_hash[:away])
+# end
+
+def num_points_scored(person)
+  all_players.find {|t| t[:player_name] == person}[:points]
+end
+
+def shoe_size(person)
+  all_players.find {|t| t[:player_name] == person}[:shoe]
+end
+
+def team_colors(team)
+  team == "Brooklyn Nets" ? game_hash[:home][:colors] : game_hash[:away][:colors]
+end
+
+def team_names
+  ["#{game_hash[:home][:team_name]}", "#{game_hash[:away][:team_name]}"]
+end
+
+def player_numbers(team)
+  team == "Brooklyn Nets" ? game_hash[:home][:players].map {|t| t[:number]} : game_hash[:away][:players].map {|t| t[:number]}
+end
+
+def player_stats(person)
+  all_players.find {|t| t[:player_name] == person}
+end
+
+def big_shoe_rebounds
+  all_players.max_by {|player| player[:shoe]}[:rebounds]
+end
+
+binding.pry
